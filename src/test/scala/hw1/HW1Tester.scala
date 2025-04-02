@@ -52,22 +52,62 @@ class HW1Tester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "ComplexALU"
   it should "correctly calculate realOut onlyAdd=true" in {
     test(new ComplexALU(onlyAdder=true)) { dut =>
-			???
+      // Test `n0 = 1+7i`, `n1 = 4-2i`, expected `realOut = 5`
+      dut.io.real0.poke(1.S)
+      dut.io.imag0.poke(7.S)
+      dut.io.real1.poke(4.S)
+      dut.io.imag1.poke(-2.S)
+      dut.io.doAdd.poke(true.B)
+      dut.io.realOut.expect(5.S)
     }
   }
   it should "correctly calculate realOut onlyAdd=false" in {
     test(new ComplexALU(onlyAdder = false)) { dut =>
-			???
+			// Test `n0 = 1+7i`, `n1 = 4-2i`, `doAdd = true`, expected `realOut = 5`
+      dut.io.real0.poke(1.S)
+      dut.io.imag0.poke(7.S)
+      dut.io.real1.poke(4.S)
+      dut.io.imag1.poke(-2.S)
+      dut.io.doAdd.poke(true.B)
+      dut.io.realOut.expect(5.S)
+
+      // Test `n0 = 1+7i`, `n1 = 4-2i`, `doAdd = false`, expected `realOut = -3`
+      dut.io.real0.poke(1.S)
+      dut.io.imag0.poke(7.S)
+      dut.io.real1.poke(4.S)
+      dut.io.imag1.poke(-2.S)
+      dut.io.doAdd.poke(false.B)
+      dut.io.realOut.expect(-3.S)
     }
   }
   it should "correctly calculate imagOut onlyAdd=true" in {
     test(new ComplexALU(onlyAdder = true)) { dut =>
-			???
+      // Test `n0 = 1+7i`, `n1 = 4-2i`, expected `imagOut = 5`
+      dut.io.real0.poke(1.S)
+      dut.io.imag0.poke(7.S)
+      dut.io.real1.poke(4.S)
+      dut.io.imag1.poke(-2.S)
+      dut.io.doAdd.poke(true.B)
+      dut.io.imagOut.expect(5.S)
     }
   }
   it should "correctly calculate imagOut onlyAdd=false" in {
     test(new ComplexALU(onlyAdder = false)) { dut =>
-			???
+			// Test `n0 = 1+7i`, `n1 = 4-2i`, `doAdd = true`, expected `imagOut = 5`
+      dut.io.real0.poke(1.S)
+      dut.io.imag0.poke(7.S)
+      dut.io.real1.poke(4.S)
+      dut.io.imag1.poke(-2.S)
+      dut.io.doAdd.poke(true.B)
+      dut.io.imagOut.expect(5.S)
+
+      // Test `n0 = 1+7i`, `n1 = 4-2i`, `doAdd = false`, expected `imagOut = 9`
+      dut.io.real0.poke(1.S)
+      dut.io.imag0.poke(7.S)
+      dut.io.real1.poke(4.S)
+      dut.io.imag1.poke(-2.S)
+      dut.io.doAdd.poke(false.B)
+      dut.io.imagOut.expect(9.S)
     }
   }
 }
